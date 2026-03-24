@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import AddToCartButton from "@/components/AddToCartButton";
 
 interface BubbleProduct {
   /** unique identifier of product */
@@ -116,9 +118,12 @@ export default async function BundlesPage() {
                 </ul>
               </div>
 
-              <button className="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800">
-                Add Bundle to Cart
-              </button>
+              <AddToCartButton
+                id={bundle.id}
+                name={bundle.name}
+                price={totalPrice}
+                image={includedProducts[0]?.image || "/placeholder.png"}
+              />
             </div>
           );
         })}

@@ -3,6 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useCheckout } from "@/app/context/CheckoutContext";
 
+/** * DeliveryPage component allows users to select their preferred delivery method (pickup or delivery) during the checkout process.
+ * It uses the CheckoutContext to store the selected delivery type and navigates to the next step in the checkout flow after selection.
+ */
 export default function DeliveryPage() {
   const { data, setData } = useCheckout();
   const router = useRouter();

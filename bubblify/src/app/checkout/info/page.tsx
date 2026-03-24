@@ -8,16 +8,17 @@ export default function InfoPage() {
   const { data, setData } = useCheckout();
   const router = useRouter();
 
+  //persistence of data previously entered by user
   const [form, setForm] = useState({
-    name: "",
-    address: "",
-    city: "",
-    postalCode: "",
-    telephone: "",
+    name: data.name || "",
+    address: data.address || "",
+    city: data.city || "",
+    postalCode: data.postalCode || "",
+    telephone: data.telephone || "",
   });
 
   const handleSubmit = () => {
-    // ✅ Validation
+    // Validation
     if (!form.name || !form.telephone) {
       alert("Missing required fields");
       return;
@@ -35,36 +36,67 @@ export default function InfoPage() {
   };
 
   return (
-    <div>
-      <h1>Enter Info</h1>
+    <main className="mx-auto max-w-3xl px-6 py-10">
+      <p className="mb-4 text-sm text-gray-500">Step 2 of 3 — Information</p>
+      <h1 className="mb-8 text-4xl font-bold">Your Information</h1>
 
-      <input
-        placeholder="Name"
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
-      />
-      <input
-        placeholder="Telephone"
-        onChange={(e) => setForm({ ...form, telephone: e.target.value })}
-      />
+      <div className="space-y-4 rounded-lg border bg-white p-6 shadow-sm">
+        <input
+          value={form.name}
+          placeholder="Name"
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          className="w-full rounded-md border px-4 py-2"
+        />
 
-      {data.deliveryType === "delivery" && (
-        <>
-          <input
-            placeholder="Address"
-            onChange={(e) => setForm({ ...form, address: e.target.value })}
-          />
-          <input
-            placeholder="City"
-            onChange={(e) => setForm({ ...form, city: e.target.value })}
-          />
-          <input
-            placeholder="Postal Code"
-            onChange={(e) => setForm({ ...form, postalCode: e.target.value })}
-          />
-        </>
-      )}
+        <input
+          value={form.telephone}
+          placeholder="Telephone"
+          onChange={(e) => setForm({ ...form, telephone: e.target.value })}
+          className="w-full rounded-md border px-4 py-2"
+        />
 
-      <button onClick={handleSubmit}>Next</button>
-    </div>
+        {data.deliveryType === "delivery" && (
+          <>
+            <input
+              value={form.address}
+              placeholder="Address"
+              onChange={(e) => setForm({ ...form, address: e.target.value })}
+              className="w-full rounded-md border px-4 py-2"
+            />
+
+            <input
+              value={form.city}
+              placeholder="City"
+              onChange={(e) => setForm({ ...form, city: e.target.value })}
+              className="w-full rounded-md border px-4 py-2"
+            />
+
+            <input
+              value={form.postalCode}
+              placeholder="Postal Code"
+              onChange={(e) => setForm({ ...form, postalCode: e.target.value })}
+              className="w-full rounded-md border px-4 py-2"
+            />
+          </>
+        )}
+
+        <div className="flex justify-between pt-4">
+          {/* Back button */}
+          <button
+            onClick={() => router.back()}
+            className="rounded-md border px-4 py-2 hover:bg-gray-100"
+          >
+            Back
+          </button>
+
+          <button
+            onClick={handleSubmit}
+            className="rounded-md bg-black px-6 py-2 text-white hover:bg-gray-800"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </main>
   );
 }

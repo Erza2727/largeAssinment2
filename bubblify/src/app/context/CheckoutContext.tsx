@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-
+import { CartItem } from "@/types/cart";
 type DeliveryType = "pickup" | "delivery";
 
 interface CheckoutData {
@@ -11,7 +11,7 @@ interface CheckoutData {
   city?: string;
   postalCode?: string;
   telephone: string;
-  cartItems: any[]; // replace with proper type later
+  cartItems: CartItem[];
 }
 
 interface CheckoutContextType {

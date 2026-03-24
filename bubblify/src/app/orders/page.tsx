@@ -2,14 +2,18 @@ import { redirect } from "next/navigation";
 import { getOrdersByTelephone } from "@/lib/orders";
 
 interface OrdersPageProps {
+  /** searchParams object containing the telephone number used to fetch the corresponding orders */
   searchParams: Promise<{
     telephone?: string;
   }>;
 }
 
-export default async function OrdersPage({
-  searchParams,
-}: OrdersPageProps) {
+/** * OrdersPage component allows users to search for their past orders using their telephone number.
+ * It checks if there are any orders associated with the provided telephone number and redirects to the order details page if found.
+ * If no orders are found, it displays a message indicating that there are no orders associated with that telephone number.
+ * @param {OrdersPageProps} props - The props containing the search parameters with the telephone number to search for orders.
+ */
+export default async function OrdersPage({ searchParams }: OrdersPageProps) {
   const { telephone } = await searchParams;
 
   if (telephone) {

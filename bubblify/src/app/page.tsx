@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+/** * HomePage component serves as the landing page for the Bubblify application.
+ * It provides a welcoming message and a call-to-action button that directs users to the products page where they can browse the available bubble products.
+ */
 export default function HomePage() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-10">

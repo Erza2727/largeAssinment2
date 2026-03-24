@@ -3,19 +3,30 @@ import Link from "next/link";
 import AddToCartButton from "@/components/AddToCartButton";
 
 interface BubbleProduct {
+  /** unique identifier of product */
   id: number;
+  /** name of the bubble product */
   name: string;
+  /** description of the bubble product */
   description: string;
+  /** price of the bubble product */
   price: number;
+  /** image URL of the bubble product */
   image: string;
 }
 
 interface BubbleDetailPageProps {
+  /** params containing the id of the bubble product to display */
   params: Promise<{
     id: string;
   }>;
 }
 
+/** * Fetches the details of a single bubble product by its id from the API.
+ * @param {string} id - The unique identifier of the bubble product to fetch.
+ * @returns {Promise<BubbleProduct>} A promise that resolves to the bubble product details.
+ * @throws Will throw an error if the API request fails or returns a non-ok response.
+ */
 async function getBubbleById(id: string): Promise<BubbleProduct> {
   const res = await fetch(`http://localhost:3500/api/bubbles/${id}`, {
     cache: "no-store",
@@ -27,7 +38,11 @@ async function getBubbleById(id: string): Promise<BubbleProduct> {
 
   return res.json();
 }
-
+/** * BubbleDetailPage component displays the details of a single bubble product.
+ * It fetches the product data based on the id from the URL parameters and renders
+ * the product image, name, description, price, and an Add to Cart button.
+ * @param {BubbleDetailPageProps} props - The props containing the URL parameters with the bubble product id.
+ */
 export default async function BubbleDetailPage({
   params,
 }: BubbleDetailPageProps) {
@@ -53,19 +68,15 @@ export default async function BubbleDetailPage({
             priority
           />
         </div>
-
         <h1 className="mb-4 text-4xl font-bold">{bubble.name}</h1>
-
         <p className="mb-4 text-lg text-gray-700">{bubble.description}</p>
-
-        <p className="mb-8 text-2xl font-semibold">${bubble.price}</p>
-
-        | <AddToCartButton
-            id={bubble.id}
-            name={bubble.name}
-            price={bubble.price}
-            image={bubble.image}
-          />
+        <p className="mb-8 text-2xl font-semibold">${bubble.price}</p>|{" "}
+        <AddToCartButton
+          id={bubble.id}
+          name={bubble.name}
+          price={bubble.price}
+          image={bubble.image}
+        />
       </div>
     </main>
   );

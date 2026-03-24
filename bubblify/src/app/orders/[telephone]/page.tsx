@@ -2,11 +2,16 @@ import { notFound } from "next/navigation";
 import { getOrdersByTelephone } from "@/lib/orders";
 
 interface OrderDetailsPageProps {
+  /** params object containing the telephone number used to fetch the corresponding orders */
   params: Promise<{
     telephone: string;
   }>;
 }
-
+/** * OrderDetailsPage component displays the details of orders associated with a specific telephone number.
+ * It fetches the orders using the getOrdersByTelephone function and renders the order information, including customer details and the list of products in each order.
+ * If no orders are found for the given telephone number, it triggers a 404 not found response.
+ * @param {OrderDetailsPageProps} props - The props containing the URL parameters with the telephone number to fetch orders for.
+ */
 export default async function OrderDetailsPage({
   params,
 }: OrderDetailsPageProps) {
@@ -25,7 +30,7 @@ export default async function OrderDetailsPage({
         {orders.map((order, index) => {
           const totalPrice = order.cartItems.reduce(
             (sum, item) => sum + item.price * item.quantity,
-            0
+            0,
           );
 
           return (
@@ -56,7 +61,8 @@ export default async function OrderDetailsPage({
                     )}
                     {order.city && (
                       <p>
-                        <span className="font-semibold">City:</span> {order.city}
+                        <span className="font-semibold">City:</span>{" "}
+                        {order.city}
                       </p>
                     )}
                     {order.postalCode && (
@@ -73,14 +79,13 @@ export default async function OrderDetailsPage({
                 <h2 className="mb-3 text-2xl font-semibold">Products</h2>
 
                 {order.cartItems.length === 0 ? (
-                  <p className="text-gray-600">No products found in this order.</p>
+                  <p className="text-gray-600">
+                    No products found in this order.
+                  </p>
                 ) : (
                   <ul className="space-y-3">
                     {order.cartItems.map((item) => (
-                      <li
-                        key={item.id}
-                        className="rounded-md border p-4"
-                      >
+                      <li key={item.id} className="rounded-md border p-4">
                         <p className="font-medium">{item.name}</p>
                         <p>Price: ${item.price}</p>
                         <p>Quantity: {item.quantity}</p>

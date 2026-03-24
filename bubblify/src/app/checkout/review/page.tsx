@@ -68,6 +68,10 @@ import { submitOrder } from "./actions";
 import { useRouter } from "next/navigation";
 import { getCart } from "@/lib/cart";
 
+/** * ReviewPage component allows users to review their order details before confirming the purchase.
+ * It displays the user's information, delivery method, and the products in the cart along with the total price.
+ * The component also handles the submission of the order by sending the data to the API and redirecting to the success page.
+ */
 export default function ReviewPage() {
   const { data, setData } = useCheckout();
   const router = useRouter();
@@ -81,7 +85,7 @@ export default function ReviewPage() {
 
   const totalPrice = data.cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
 
   return (

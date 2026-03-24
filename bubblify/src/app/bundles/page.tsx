@@ -1,19 +1,30 @@
 import Image from "next/image";
 
 interface BubbleProduct {
+  /** unique identifier of product */
   id: number;
+  /** name of the bubble product */
   name: string;
+  /** description of the bubble product */
   description: string;
+  /** price of the bubble product */
   price: number;
+  /** image URL of the bubble product */
   image: string;
 }
 
 interface Bundle {
+  /** unique identifier of bundle */
   id: number;
+  /** name of the bundle product */
   name: string;
+  /** array of bubble product ids included in the bundle */
   items: number[];
 }
-
+/** * Fetches a list of bundle products from the API.
+ * @returns {Promise<Bundle[]>} A promise that resolves to an array of bundle products.
+ * @throws Will throw an error if the API request fails or returns a non-ok response.
+ */
 async function getBundles(): Promise<Bundle[]> {
   const res = await fetch("http://localhost:3500/api/bundles", {
     cache: "no-store",
@@ -26,6 +37,10 @@ async function getBundles(): Promise<Bundle[]> {
   return res.json();
 }
 
+/** * Fetches a list of bubble products from the API.
+ * @returns {Promise<BubbleProduct[]>} A promise that resolves to an array of bubble products.
+ * @throws Will throw an error if the API request fails or returns a non-ok response.
+ */
 async function getBubbles(): Promise<BubbleProduct[]> {
   const res = await fetch("http://localhost:3500/api/bubbles", {
     cache: "no-store",
@@ -38,6 +53,10 @@ async function getBubbles(): Promise<BubbleProduct[]> {
   return res.json();
 }
 
+/** * BundlesPage component displays a list of bundle products fetched from the API.
+ * Each bundle is displayed with its name, included products, total price, and an Add to Cart button.
+ * It fetches both bundles and bubble products to calculate the details of each bundle.
+ */
 export default async function BundlesPage() {
   const [bundles, bubbles] = await Promise.all([getBundles(), getBubbles()]);
 
@@ -53,7 +72,7 @@ export default async function BundlesPage() {
 
           const totalPrice = includedProducts.reduce(
             (sum, product) => sum + product.price,
-            0
+            0,
           );
 
           return (
@@ -82,7 +101,9 @@ export default async function BundlesPage() {
                 ))}
               </div>
 
-              <p className="mb-3 text-lg font-medium">Total price: ${totalPrice}</p>
+              <p className="mb-3 text-lg font-medium">
+                Total price: ${totalPrice}
+              </p>
 
               <div className="mb-5">
                 <h3 className="mb-2 font-semibold">Included products:</h3>

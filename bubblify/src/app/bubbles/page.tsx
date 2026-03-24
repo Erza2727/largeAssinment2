@@ -2,12 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface BubbleProduct {
+  /** unique identifier of product */
   id: number;
+  /** name of the bubble product */
   name: string;
+  /** price of the bubble product */
   price: number;
+  /** image URL of the bubble product */
   image: string;
 }
 
+/** * Fetches a list of bubble products from the API.
+ * @returns {Promise<BubbleProduct[]>} A promise that resolves to an array of bubble products.
+ * @throws Will throw an error if the API request fails or returns a non-ok response.
+ */
 async function getBubbles(): Promise<BubbleProduct[]> {
   const res = await fetch("http://localhost:3500/api/bubbles", {
     cache: "no-store",
@@ -20,6 +28,9 @@ async function getBubbles(): Promise<BubbleProduct[]> {
   return res.json();
 }
 
+/** * BubblesPage component displays a list of bubble products fetched from the API.
+ * Each product is displayed with its image, name, and price, and links to a detail page for that product.
+ */
 export default async function BubblesPage() {
   const bubbles = await getBubbles();
 

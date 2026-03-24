@@ -4,6 +4,10 @@ import { useCheckout } from "@/app/context/CheckoutContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+/** * InfoPage component collects the user's information during the checkout process.
+ * It displays a form with fields for name, telephone, and if delivery is selected, address, city, and postal code.
+ * The component validates the input and saves the data to the CheckoutContext before navigating to the review step.
+ */
 export default function InfoPage() {
   const { data, setData } = useCheckout();
   const router = useRouter();

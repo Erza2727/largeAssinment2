@@ -11,6 +11,10 @@ import {
 } from "@/lib/cart";
 import { CartItem } from "@/types/cart";
 
+/** * CartPage component displays the items currently in the user's cart.
+ * It allows users to increase or decrease the quantity of each item, remove items from the cart,
+ * and view the total price of their order. If the cart is empty, it shows a message and a link to continue shopping.
+ */
 export default function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
@@ -18,30 +22,39 @@ export default function CartPage() {
     setCartItems(getCart());
   }, []);
 
+  /** * Refreshes the cart items state by fetching the latest cart data from local storage.
+   * This function is called after any operation that modifies the cart to ensure the UI stays in sync with the cart data.
+   */
   function refreshCart() {
     setCartItems(getCart());
   }
-
+  /** * Handles the increase quantity action for a cart item.
+   * It calls the increaseQuantity function from the cart library and then refreshes the cart state.
+   * @param {number} id - The unique identifier of the cart item to increase the quantity of.
+   */
   function handleIncrease(id: number) {
     increaseQuantity(id);
     refreshCart();
   }
-
+  /** * Handles the decrease quantity action for a cart item.
+   * It calls the decreaseQuantity function from the cart library and then refreshes the cart state.
+   * @param {number} id - The unique identifier of the cart item to decrease the quantity of.
+   */
   function handleDecrease(id: number) {
     decreaseQuantity(id);
     refreshCart();
   }
-
+  /** * Handles the remove item action for a cart item.
+   * It calls the removeFromCart function from the cart library and then refreshes the cart state.
+   * @param {number} id - The unique identifier of the cart item to remove from the cart.
+   */
   function handleRemove(id: number) {
     removeFromCart(id);
     refreshCart();
   }
 
   const totalPrice = useMemo(() => {
-    return cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
+    return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [cartItems]);
 
   return (

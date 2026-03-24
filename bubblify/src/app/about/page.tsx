@@ -5,23 +5,19 @@ export default function AboutPage() {
 
       <div className="rounded-lg border bg-white p-6 shadow-sm">
         <p className="mb-4 text-lg text-gray-700">
-          Bubblify was founded when the bubble world faced a major crisis.
-          After the biggest bubble supplier suddenly went out of business,
-          children everywhere were at risk of having a summer without bubbles.
+          Bubblify is an up- and coming bubble supplier for fun bubbles all
+          summer long.
         </p>
 
         <p className="mb-4 text-lg text-gray-700">
-          Seeing both the problem and the opportunity, Bubblify stepped in with
-          one goal: to become the most trusted bubble company in the industry.
-          From classic bubbles to unusual creations like wild bubbles and dark
-          matter bubbles, the company focuses on bringing fun, creativity, and
-          excitement to every customer.
+          Our diverse catalouge is guaranteed to have something fresh and fun
+          for the whole family. Our innovative BubbleTech™ formula is the
+          foundation to our long-lasting and unique bubbles.
         </p>
 
         <p className="text-lg text-gray-700">
-          Today, Bubblify continues to grow by offering bubble products and
-          bundles through its online store, making sure no child has to face a
-          bubbleless summer again.
+          Stay tuned for new releases with seasonal flare, like our Christmas
+          bubbles and our one-of-kind Dark Matter bubbles!{" "}
         </p>
       </div>
     </main>

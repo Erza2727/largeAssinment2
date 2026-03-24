@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { CheckoutProvider } from "./context/CheckoutContext";
 
 export const metadata = {
   title: "Bubblify",
@@ -14,8 +15,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-slate-50 text-gray-900">
-        <Navbar />
-        {children}
+        <CheckoutProvider>
+          <Navbar />
+          {children}
+        </CheckoutProvider>
       </body>
     </html>
   );
